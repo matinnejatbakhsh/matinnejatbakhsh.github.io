@@ -519,40 +519,45 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Add hover effect to skill items
-        document.querySelectorAll('.skill-item').forEach(item => {
-            item.addEventListener('mouseover', function() {
-                this.style.transform = 'translateX(10px)';
-            });
-            item.addEventListener('mouseout', function() {
-                this.style.transform = 'translateX(0)';
-            });
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+    // Add hover effect to skill items
+    document.querySelectorAll('.skill-item').forEach(item => {
+        item.addEventListener('mouseover', function() {
+            this.style.transform = 'translateX(10px)';
         });
-
-        // Contact form character count
-        const messageTextarea = document.getElementById('message');
-        const charCount = document.getElementById('charCount');
-
-        messageTextarea.addEventListener('input', function() {
-            const remaining = this.value.length;
-            charCount.textContent = remaining;
+        item.addEventListener('mouseout', function() {
+            this.style.transform = 'translateX(0)';
         });
+    });
 
-        // Form submission handler
-        function handleSubmit(event) {
-            event.preventDefault();
-            
-            const formMessage = document.getElementById('formMessage');
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData);
-            
-            // Here you would typically send the data to your server
-            // For demonstration, we'll just show a success message
-            try {
-                // Simulate sending email
-                console.log('Sending email:', data);
-                
+    // Contact form character count
+    const messageTextarea = document.getElementById('message');
+    const charCount = document.getElementById('charCount');
+
+    messageTextarea.addEventListener('input', function() {
+        const remaining = this.value.length;
+        charCount.textContent = remaining;
+    });
+
+    // Form submission handler
+    async function handleSubmit(event) {
+        event.preventDefault();
+        
+        const formMessage = document.getElementById('formMessage');
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData);
+        
+        try {
+            const response = await fetch('send_email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
                 // Show success message
                 formMessage.className = 'form-message success';
                 formMessage.textContent = 'Thank you! Your message has been sent successfully.';
@@ -565,29 +570,32 @@
                 setTimeout(() => {
                     formMessage.style.display = 'none';
                 }, 5000);
-                
-            } catch (error) {
-                // Show error message
-                formMessage.className = 'form-message error';
-                formMessage.textContent = 'Oops! Something went wrong. Please try again.';
+            } else {
+                throw new Error('Failed to send email');
             }
-            
-            return false;
+        } catch (error) {
+            console.error('Error:', error);
+            // Show error message
+            formMessage.className = 'form-message error';
+            formMessage.textContent = 'Oops! Something went wrong. Please try again.';
         }
+        
+        return false;
+    }
 
-        // Add floating label effect to form inputs
-        document.querySelectorAll('.form-input, .form-textarea').forEach(element => {
-            element.addEventListener('focus', function() {
-                this.parentElement.classList.add('focused');
-            });
-            
-            element.addEventListener('blur', function() {
-                if (!this.value) {
-                    this.parentElement.classList.remove('focused');
-                }
-            });
+    // Add floating label effect to form inputs
+    document.querySelectorAll('.form-input, .form-textarea').forEach(element => {
+        element.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
         });
-    </script>
+        
+        element.addEventListener('blur', function() {
+            if (!this.value) {
+                this.parentElement.classList.remove('focused');
+            }
+        });
+    });
+</script>
 </body>
 </html>
 
