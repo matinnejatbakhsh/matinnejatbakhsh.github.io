@@ -49,10 +49,6 @@
             transition: transform 0.3s ease;
         }
 
-        .profile-image:hover {
-            transform: scale(1.05);
-        }
-
         .profile-info h1 {
             font-size: 2.5em;
             color: #2c3e50;
@@ -229,11 +225,6 @@
             }
         }
 
-        /* Add this script for image upload functionality */
-        #imageUpload {
-            display: none;
-        }
-
         .contact-form-section {
             margin-top: 40px;
             padding: 40px;
@@ -342,8 +333,7 @@
 <body>
     <div class="container">
         <div class="profile-section">
-            <input type="file" id="imageUpload" accept="image/*">
-            <img src="https://via.placeholder.com/200" alt="Profile" class="profile-image" id="profileImage" onclick="document.getElementById('imageUpload').click()">
+            <img src="https://via.placeholder.com/200" alt="Profile" class="profile-image" id="profileImage">
             <div class="profile-info">
                 <h1>Matin Nejatbakhsh</h1>
                 <h2>Software Developer</h2>
@@ -521,18 +511,6 @@
     </div>
 
     <script>
-        // Image upload functionality
-        document.getElementById('imageUpload').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('profileImage').src = e.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
         // Add hover effect to skill items
         document.querySelectorAll('.skill-item').forEach(item => {
             item.addEventListener('mouseover', function() {
