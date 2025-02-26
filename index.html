@@ -230,7 +230,7 @@
 
         .contact-form-section {
             margin-top: 40px;
-            padding: 40px;
+            padding: 20px;
             background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
             border-radius: 20px;
             color: white;
@@ -238,7 +238,7 @@
 
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr;
             gap: 20px;
             margin-top: 20px;
         }
@@ -331,6 +331,12 @@
                 padding: 20px;
             }
         }
+
+        @media (min-width: 768px) {
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
 </head>
 <body>
@@ -342,7 +348,7 @@
                 <h2>Software Developer</h2>
                 <div class="contact-links">
                     <a href="#" class="contact-link">📍 Esfahan</a>
-                    <a href="mailto:matinnjt2000@gmail.com" class="contact-link">✉️ Email</a>
+                    <a href="/cdn-cgi/l/email-protection#bed3dfcad7d0d0d4ca8c8e8e8efed9d3dfd7d290ddd1d3" class="contact-link">✉️ Email</a>
                     <a href="https://github.com/Matiiiin" class="contact-link">👨‍💻 GitHub</a>
                     <a href="https://www.linkedin.com/in/matin-nejatbakhsh/" class="contact-link">💼 LinkedIn</a>
                 </div>
@@ -513,7 +519,7 @@
         </div>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Add hover effect to skill items
         document.querySelectorAll('.skill-item').forEach(item => {
             item.addEventListener('mouseover', function() {
@@ -584,3 +590,4 @@
     </script>
 </body>
 </html>
+
